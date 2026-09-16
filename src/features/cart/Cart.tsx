@@ -1,11 +1,17 @@
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { removeFromCart, updateQuantity } from './cartSlice';
+import { removeFromCart, updateQuantity, clearCart } from './cartSlice';
 import { ShoppingBag, Trash2, Plus, Minus, ShoppingCart } from 'lucide-react';
 
 const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, totalAmount, totalQuantity } = useAppSelector((state) => state.cart);
+
+  const handleCheckout = () => {
+    if (items.length === 0) return;
+    alert(`Thanh toán thành công!\nTổng số tiền: ${totalAmount.toLocaleString('vi-VN')}₫\nCảm ơn bạn đã mua sắm tại Cửa hàng Găng MMA!`);
+    dispatch(clearCart());
+  };
 
   if (items.length === 0) {
     return (
@@ -80,7 +86,7 @@ const Cart: React.FC = () => {
           <span>Tổng cộng:</span>
           <span>{totalAmount.toLocaleString('vi-VN')}₫</span>
         </div>
-        <button className="btn-checkout">
+        <button className="btn-checkout" onClick={handleCheckout}>
           Thanh toán
         </button>
       </div>
