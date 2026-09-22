@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
+import { FavoritesProvider } from './contexts/FavoritesContext';
 import './index.css';
 
 const container = document.getElementById('app');
@@ -12,7 +13,9 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <FavoritesProvider>
+          <App />
+        </FavoritesProvider>
       </Provider>
     </React.StrictMode>
   );
