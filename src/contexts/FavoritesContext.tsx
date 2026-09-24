@@ -20,7 +20,6 @@ const initialState: FavoritesState = {
 const favoritesReducer = (state: FavoritesState, action: FavoritesAction): FavoritesState => {
   switch (action.type) {
     case 'ADD_FAVORITE':
-      // Prevent duplicates
       if (state.favorites.some(p => p.id === action.payload.id)) {
         return state;
       }
